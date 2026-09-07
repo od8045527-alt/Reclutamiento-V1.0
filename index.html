@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentFlow - Reclutamiento</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-100 font-sans">
+
+    <!-- Navbar -->
+    <header class="bg-indigo-600 text-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">TalentFlow - Reclutamiento</h1>
+            <div class="flex gap-4">
+                <button onclick="cambiarVista('vacantes')" id="btn-vacantes" class="bg-indigo-700 px-3 py-1.5 rounded-md text-sm font-medium transition">Vacantes</button>
+                <button onclick="cambiarVista('seguimiento')" id="btn-seguimiento" class="hover:bg-indigo-700 px-3 py-1.5 rounded-md text-sm font-medium transition">Seguimiento (Kanban)</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        
+        <!-- VISTA: VACANTES -->
+        <section id="vista-vacantes" class="space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-slate-800">Vacantes Activas</h2>
+                <button onclick="abrirModalVacante()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">Nueva Vacante</button>
+            </div>
+            
+            <div id="lista-vacantes" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Inyectado por JS -->
+            </div>
+        </section>
+
+        <!-- VISTA: SEGUIMIENTO (KANBAN) -->
+        <section id="vista-seguimiento" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-slate-800">Seguimiento de Candidatos (ATS)</h2>
+                <button onclick="abrirModalCandidato()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">Agregar Postulante</button>
+            </div>
+
+            <!-- Tablero Kanban -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 overflow-x-auto pb-4">
+                <div class="bg-slate-200 p-4 rounded-xl flex flex-col min-h-[500px]">
+                    <h3 class="font-bold text-slate-700 mb-3 flex justify-between">Nuevos <span id="count-nuevo" class="bg-slate-300 px-2 py-0.5 rounded-full text-xs">0</span></h3>
+                    <div id="col-nuevo" class="space-y-3 flex-1" ondragover="permitirDrop(event)" ondrop="dropiar(event, 'nuevo')"></div>
+                </div>
+                <div class="bg-slate-200 p-4 rounded-xl flex flex-col min-h-[500px]">
+                    <h3 class="font-bold text-slate-700 mb-3 flex justify-between">En Revisión <span id="count-revision" class="bg-slate-300 px-2 py-0.5 rounded-full text-xs">0</span></h3>
+                    <div id="col-revision" class="space-y-3 flex-1" ondragover="permitirDrop(event)" ondrop="dropiar(event, 'revision')"></div>
+                </div>
+                <div class="bg-slate-200 p-4 rounded-xl flex flex-col min-h-[500px]">
+                    <h3 class="font-bold text-slate-700 mb-3 flex justify-between">Entrevista <span id="count-entrevista" class="bg-slate-300 px-2 py-0.5 rounded-full text-xs">0</span></h3>
+                    <div id="col-entrevista" class="space-y-3 flex-1" ondragover="permitirDrop(event)" ondrop="dropiar(event, 'entrevista')"></div>
+                </div>
+                <div class="bg-slate-200 p-4 rounded-xl flex flex-col min-h-[500px]">
+                    <h3 class="font-bold text-slate-700 mb-3 flex justify-between">Contratado <span id="count-contratado" class="bg-slate-300 px-2 py-0.5 rounded-full text-xs">0</span></h3>
+                    <div id="col-contratado" class="space-y-3 flex-1" ondragover="permitirDrop(event)" ondrop="dropiar(event, 'contratado')"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Candidato -->
+    <div id="modal-candidato" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 space-y-4 shadow-xl">
+            <h3 class="text-lg font-bold text-slate-800">Agregar Nuevo Postulante</h3>
+            <input type="text" id="input-nombre" placeholder="Nombre del candidato" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-indigo-600">
+            <input type="text" id="input-puesto" placeholder="Puesto al que aplica" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-indigo-600">
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="cerrarModalCandidato()" class="px-4 py-2 text-sm text-slate-600 hover:bg-slate-100 rounded-lg">Cancelar</button>
+                <button onclick="guardarCandidato()" class="px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Firebase y lógica principal -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+        // TUS CREDENCIALES REALES DE FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyCZnRmfHMqkc5yx2wZoJ1t9WNH8z1Hyso",
+            authDomain: "reclutamiento-81250.firebaseapp.com",
+            projectId: "reclutamiento-81250",
+            storageBucket: "reclutamiento-81250.firebasestorage.app",
+            messagingSenderId: "882109060039",
+            appId: "1:882109060039:web:a6ca1fa54491267e143fe2",
+            measurementId: "G-9XRBF2PMS0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let vacantes = [];
+        let candidatos = [];
+
+        // Escuchar cambios en tiempo real desde Firestore para Vacantes
+        onSnapshot(collection(db, "vacantes"), (snapshot) => {
+            vacantes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            renderVacantes();
+        });
+
+        // Escuchar cambios en tiempo real desde Firestore para Candidatos
+        onSnapshot(collection(db, "candidatos"), (snapshot) => {
+            candidatos = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            renderKanban();
+        });
+
+        // Exponer funciones globales para los eventos del HTML
+        window.cambiarVista = function(vista) {
+            const vVacantes = document.getElementById('vista-vacantes');
+            const vSeguimiento = document.getElementById('vista-seguimiento');
+            const btnV = document.getElementById('btn-vacantes');
+            const btnS = document.getElementById('btn-seguimiento');
+
+            if (vista === 'vacantes') {
+                vVacantes.classList.remove('hidden');
+                vSeguimiento.classList.add('hidden');
+                btnV.classList.add('bg-indigo-700');
+                btnS.classList.remove('bg-indigo-700');
+            } else {
+                vVacantes.classList.add('hidden');
+                vSeguimiento.classList.remove('hidden');
+                btnS.classList.add('bg-indigo-700');
+                btnV.classList.remove('bg-indigo-700');
+            }
+        }
+
+        window.renderVacantes = function() {
+            const contenedor = document.getElementById('lista-vacantes');
+            contenedor.innerHTML = '';
+            vacantes.forEach(v => {
+                contenedor.innerHTML += `
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-xs font-semibold bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full">${v.depto}</span>
+                            <h3 class="text-lg font-bold text-slate-800 mt-2">${v.titulo}</h3>
+                            <p class="text-sm text-slate-500 mt-1">Ubicación: ${v.ubicacion || 'Remoto'}</p>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-slate-600 pt-2 border-t border-slate-100">
+                            <span>Vacantes: <strong>${v.vacantesCount || 1}</strong></span>
+                            <button onclick="cambiarVista('seguimiento')" class="text-indigo-600 font-medium hover:underline">Ver Seguimiento &rarr;</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.renderKanban = function() {
+            const etapas = ['nuevo', 'revision', 'entrevista', 'contratado'];
+            etapas.forEach(etapa => {
+                const col = document.getElementById(`col-${etapa}`);
+                const count = document.getElementById(`count-${etapa}`);
+                col.innerHTML = '';
+                
+                const filtrados = candidatos.filter(c => c.etapa === etapa);
+                count.textContent = filtrados.length;
+
+                filtrados.forEach(c => {
+                    col.innerHTML += `
+                        <div draggable="true" ondragstart="arrastrar(event, '${c.id}')" class="bg-white p-3 rounded-lg shadow-xs border border-slate-300 cursor-grab active:cursor-grabbing space-y-1">
+                            <p class="font-semibold text-slate-800 text-sm">${c.nombre}</p>
+                            <p class="text-xs text-slate-500">${c.puesto}</p>
+                        </div>
+                    `;
+                });
+            });
+        }
+
+        let candidatoIdArrastrado = null;
+        window.arrastrar = function(event, id) {
+            candidatoIdArrastrado = id;
+        }
+        window.permitirDrop = function(event) {
+            event.preventDefault();
+        }
+        window.dropiar = async function(event, nuevaEtapa) {
+            event.preventDefault();
+            if (candidatoIdArrastrado) {
+                const docRef = doc(db, "candidatos", candidatoIdArrastrado);
+                await updateDoc(docRef, { etapa: nuevaEtapa });
+            }
+        }
+
+        window.abrirModalCandidato = () => document.getElementById('modal-candidato').classList.remove('hidden');
+        window.cerrarModalCandidato = () => document.getElementById('modal-candidato').classList.add('hidden');
+
+        window.guardarCandidato = async function() {
+            const nombre = document.getElementById('input-nombre').value;
+            const puesto = document.getElementById('input-puesto').value;
+            if(nombre && puesto) {
+                await addDoc(collection(db, "candidatos"), { nombre, puesto, etapa: 'nuevo' });
+                document.getElementById('input-nombre').value = '';
+                document.getElementById('input-puesto').value = '';
+                cerrarModalCandidato();
+            }
+        }
+
+        window.abrirModalVacante = async function() {
+            const titulo = prompt("Título de la nueva vacante:");
+            const depto = prompt("Departamento:");
+            if(titulo && depto) {
+                await addDoc(collection(db, "vacantes"), { titulo, depto, ubicacion: "Remoto/Híbrido", vacantesCount: 1 });
+            }
+        }
+    </script>
+</body>
+</html>
