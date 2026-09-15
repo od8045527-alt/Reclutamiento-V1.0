@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src https://www.gstatic.com 'sha256-8BnLTxyV+wdHFWoD7wn4aKkDs/djQ5Tov8RyPwAM4Mg=' 'sha256-wh79fkczDH7uDKh1MvGb6DVTcYB3X0MJPC72q5wv3U8='; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src 'none'; connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com; frame-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src https://www.gstatic.com 'sha256-LDp/bIw6wfliVyVSJItO9C3NrEMAs7bhbmn+sykT55U=' 'sha256-wh79fkczDH7uDKh1MvGb6DVTcYB3X0MJPC72q5wv3U8='; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src 'none'; connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com; frame-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Yello MKT, plataforma interna para administrar vacantes, candidatos y usuarios.">
@@ -99,7 +99,211 @@ html{scroll-behavior:smooth}button,input,select,textarea{font:inherit}button:foc
 
 #ym-options{max-height:120px;overflow:auto;flex-shrink:0}
 dialog.pdf-pro{width:min(1200px,96vw);max-width:none;height:92dvh;max-height:96dvh;padding:0;border:1px solid var(--line);border-radius:16px;background:#f1efe7}dialog.pdf-pro::backdrop{background:rgba(0,0,0,.65)}.pdf-pro header{padding:14px 18px;background:white;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.pdf-pro header strong{flex:1;overflow-wrap:anywhere}.pdf-pro iframe{width:100%;height:calc(100% - 118px);border:0}.pdf-pro p{margin:8px 18px;font-size:12px}.pdf-pro:fullscreen{width:100vw;height:100dvh;border-radius:0}#backup-notice .btn{margin:8px}#memory-files td{overflow-wrap:anywhere}</style>
-<style>.registration-privacy{padding:16px;border:1px solid #e2d9ad;background:#fffbea;border-radius:12px;font-size:13px;line-height:1.55;margin-bottom:20px}.registration-privacy p{margin:8px 0}.push-stack{z-index:100;top:88px;bottom:auto}.push-popup{border:2px solid #e5bd14;border-left:6px solid #ffd21c;box-shadow:0 20px 60px #19191440}.push-copy small{font-weight:800;color:#665500}.push-close{background:#f1efe7}.toast{z-index:110}#registration-success::backdrop{background:#19191499}@media(max-width:760px){.push-stack{top:76px;bottom:auto}}@media(prefers-reduced-motion:reduce){.push-popup,.push-popup.leaving{animation:none}}</style></head>
+<style>.registration-privacy{padding:16px;border:1px solid #e2d9ad;background:#fffbea;border-radius:12px;font-size:13px;line-height:1.55;margin-bottom:20px}.registration-privacy p{margin:8px 0}.push-stack{z-index:100;top:88px;bottom:auto}.push-popup{border:2px solid #e5bd14;border-left:6px solid #ffd21c;box-shadow:0 20px 60px #19191440}.push-copy small{font-weight:800;color:#665500}.push-close{background:#f1efe7}.toast{z-index:110}#registration-success::backdrop{background:#19191499}@media(max-width:760px){.push-stack{top:76px;bottom:auto}}@media(prefers-reduced-motion:reduce){.push-popup,.push-popup.leaving{animation:none}}</style><style>@media(min-width:761px){.auth{height:100dvh;min-height:0;overflow:hidden;align-items:stretch}.auth-brand{position:relative;height:100%;min-height:0;overflow:hidden;padding:clamp(24px,5vh,64px)}.auth-panel{height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:block}.auth-card{margin:auto}.auth-copy h1{font-size:clamp(30px,min(4.7vw,7vh),64px)}.auth-copy p{font-size:clamp(14px,2.5vh,18px)}.auth-copy{flex-shrink:0}}@media(min-width:761px) and (max-height:450px){.auth-brand{padding:18px}.auth-copy h1{font-size:28px;margin:8px 0}.auth-copy p{font-size:13px;margin:4px 0}.auth-note{font-size:11px}}</style><style>/* Center each form independently; auto margins collapse when scrolling is needed. */
+.auth-panel{background:#faf9f5;display:flex;flex-direction:column;align-items:center;padding:40px 32px;scrollbar-width:thin;scrollbar-color:#d8d3c5 transparent}
+.auth-card{flex:0 0 auto;width:min(464px,100%);margin:auto;padding:34px;background:#fff;border:1px solid #e9e5da;border-radius:24px;box-shadow:0 12px 40px rgba(35,30,12,.045)}
+.auth-card,.auth-card input,.auth-card button{font-family:Arial,sans-serif}
+.auth-card:has(#register-form:not(.hidden)){padding-top:26px;padding-bottom:26px}
+.auth-card:has(#register-form:not(.hidden))::before{margin-bottom:16px}
+.auth-card:has(#register-form:not(.hidden))>.sub{margin-bottom:20px}
+.auth-card:has(#register-form:not(.hidden)) .tabs{margin-bottom:20px}
+.auth-card #register-form .field{margin-bottom:14px}
+.auth-card::before{content:'';display:block;width:38px;height:5px;margin:0 auto 22px;border-radius:4px;background:#ffd21c}
+.auth-card h2{text-align:center;font:800 clamp(26px,2.3vw,34px)/1.15 Arial,sans-serif;letter-spacing:-.04em;margin:0 0 10px}
+.auth-card>.sub{text-align:center;font-size:14px;line-height:1.55;margin:0 0 26px;color:#777367}
+.auth-card .tabs{gap:4px;border:1px solid #eeeae0;background:#f5f3ec;padding:5px;border-radius:13px;margin-bottom:26px}
+.auth-card .tab{min-height:44px;border-radius:9px;font-size:13px;color:#777164;transition:background .15s,color .15s}
+.auth-card .tab.active{color:#211f17;box-shadow:0 2px 6px #211f1710}
+.auth-card .field{margin-bottom:18px}
+.auth-card .field label{font-size:12px;font-weight:700;margin-bottom:8px;color:#39362d}
+.auth-card .field input{min-height:50px;padding:13px 14px;border-radius:11px;border:1px solid #ddd8cb;background:#fdfcf9;font-size:14px;transition:border-color .15s,box-shadow .15s}
+.auth-card .field input::placeholder{color:#989184}
+.auth-card .field input:focus{background:#fff;border-color:#b99c1b;box-shadow:0 0 0 3px #ffd21c29}
+.auth-card .field small{display:block;font-size:11px;line-height:1.5;margin-top:6px}
+.auth-card .notice{padding:11px 13px;background:#faf7e6;border:1px solid #efe8c8;border-radius:10px;font-size:11px;line-height:1.5;margin-bottom:0}
+.auth-card .form-msg:empty{display:none}
+.auth-card .form-msg{line-height:1.5}
+.auth-card form>.btn-primary{min-height:50px;margin-top:8px;border-radius:11px;font-size:14px;box-shadow:0 3px 0 #d6b015;transition:background .15s,box-shadow .15s}
+.auth-card form>.btn-primary:hover{background:#ffdb3f;box-shadow:0 3px 0 #c2a015}
+.auth-card .privacy-footer{text-align:center;font-size:11px;line-height:1.6;color:#8a8375;border-top:1px solid #eeeae1;padding-top:18px;margin:24px 0 0}
+.auth-card #register-form>.meta{font-size:11px;line-height:1.5;margin:0 0 6px;color:#827b6c}
+.auth-card #register-form>[data-privacy-open]{font-size:12px;padding:4px 0 12px;text-align:left;text-decoration:underline;text-underline-offset:3px}
+@media(min-width:761px){.auth-panel{display:flex}.auth-card{margin:auto}}
+@media(min-width:761px) and (max-height:800px){.auth-panel{padding-bottom:92px}}
+@media(max-width:1000px) and (min-width:761px){.auth-panel{padding-left:20px;padding-right:20px}.auth-card{padding:26px}}
+@media(max-width:760px){.auth-panel{display:flex;padding:28px 16px 96px}.auth-card{padding:28px 22px;border-radius:20px}.auth-card h2{font-size:28px}}
+@media(prefers-reduced-motion:reduce){.auth-card input,.auth-card button{transition:none!important}}
+</style><style>.app .nav-btn{transition:background .16s,color .16s,transform .16s}
+.app .nav-btn:hover{transform:translateX(3px)}
+.app .nav-btn.active{box-shadow:0 4px 14px #0002}
+.app .btn{transition:background .16s,box-shadow .16s}
+.app .btn-primary:hover{box-shadow:0 3px 12px #c3a3172b}
+.app button:disabled,.app select:disabled{cursor:default;opacity:.55}
+.app .view.active{animation:users-view-in .18s ease-out}
+@keyframes users-view-in{from{opacity:.75;transform:translateY(4px)}to{opacity:1;transform:none}}
+#view-usuarios .heading{align-items:center;gap:14px}
+.users-section-tag{border:1px solid #e2ddcf;background:#fff;padding:8px 12px;border-radius:99px;font-size:11px;font-weight:700;color:#7c7462;white-space:nowrap}
+.users-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 18px}
+.users-metrics article{padding:20px 22px;background:white;border:1px solid #e8e3d7;border-radius:15px;transition:border-color .18s,box-shadow .18s}
+.users-metrics article:hover{border-color:#d6cfae;box-shadow:0 4px 16px #26200a05}
+.users-metrics article:first-child{background:#fff8d4;border-color:#f1e6aa}
+.users-metrics span{display:block;color:#726b5b;font-size:12px;font-weight:600}
+.users-metrics strong{display:block;font:800 32px/1.2 Arial,sans-serif;letter-spacing:-.04em;margin:10px 0 6px;color:#252219}
+.users-metrics small{color:#8f887a;font-size:11px}
+.users-access-note{font-size:12px;color:#837b6b;line-height:1.6;margin:0 0 20px}
+.users-feedback{font-size:13px;padding:12px 15px;border-radius:10px;background:#edf7ef;color:#236238;border:1px solid #d3e9d8;line-height:1.5}
+.users-feedback.is-error{background:#fff1f0;border-color:#f4ccc5;color:#a23325}
+#view-usuarios .table-wrap{border-radius:16px;overflow:hidden;box-shadow:0 4px 18px #251e0703}
+#view-usuarios .table-toolbar{display:flex;align-items:end;flex-wrap:wrap;padding:20px;gap:12px;background:#fff}
+#view-usuarios .table-toolbar label{display:block;color:#787060;font-size:11px;font-weight:700;margin-bottom:7px}
+.users-search-wrap{flex:1 1 230px;min-width:180px}
+#view-usuarios .search{width:100%;max-width:none;font-size:13px;background:#fdfcf9;border-color:#ded8ca}
+.users-filter{flex:0 1 150px}
+.users-filter select{width:100%;padding:10px;border:1px solid #ded8ca;border-radius:10px;background:#fdfcf9;font-size:12px;color:#534d40;min-height:44px}
+.users-table-scroll{overflow-x:auto;scrollbar-width:thin;scrollbar-color:#d9d3c6 transparent}
+#view-usuarios table{min-width:820px}
+#view-usuarios th{font-size:10px;background:#faf9f4;padding:14px 18px;white-space:nowrap}
+#view-usuarios td{padding:17px 18px;font-size:12px;border-bottom-color:#f0ede5;vertical-align:middle}
+#view-usuarios tbody tr{transition:background .14s}
+#view-usuarios tbody tr:hover{background:#fdfbf3}
+.users-person{display:flex;align-items:center;gap:11px;min-width:150px}
+.users-initials{width:35px;height:35px;flex-shrink:0;background:#f3f0e5;color:#81754e;border:1px solid #eae4d4;display:grid;place-items:center;border-radius:11px;font-size:11px;font-weight:800}
+.users-person strong{font-weight:700;display:block;max-width:210px;overflow-wrap:anywhere}
+.users-person small{display:block;color:#9c927b;margin-top:4px;font-size:10px}
+.users-handle{color:#817969;overflow-wrap:anywhere;max-width:200px}
+.users-badge{display:inline-flex;border-radius:7px;padding:5px 8px;font-size:10px;font-weight:700;background:#f0f1f4;color:#717889}
+.users-badge.is-admin{background:#fff2ac;color:#786010}
+.users-state{display:inline-flex;align-items:center;gap:7px;font-size:11px;white-space:nowrap;color:#667362}
+.users-state i{height:6px;width:6px;border-radius:50%;background:#56a577}
+.users-state.is-inactive{color:#938b82}.users-state.is-inactive i{background:#aea79d}
+.users-row-actions{display:flex;align-items:center;gap:6px;min-width:238px}
+.users-row-actions select{font:11px Arial,sans-serif;color:#5a5345;padding:7px;border:1px solid #e5dfd3;border-radius:8px;background:white;min-height:36px;max-width:125px}
+.users-row-actions .delete-btn{width:30px;height:32px;font-size:18px;flex-shrink:0}
+.users-protected{font-size:11px;color:#9b927e;font-style:italic}
+.users-saving-label{display:block;margin-top:5px;color:#8a7419;font-size:10px}
+.user-saving{background:#fffbea!important}
+.users-pagination{display:flex;align-items:center;justify-content:space-between;padding:15px 20px;gap:14px;background:#fff}
+.users-pagination>div{display:flex;align-items:center;gap:12px;font-size:11px;color:#817865}
+.users-pagination .btn{min-height:34px;padding:7px 12px;border:1px solid #e8e2d5;background:#fbfaf6}
+.users-pagination .meta{font-size:11px}
+.users-empty{text-align:center;padding:32px 16px;color:#756d5f}
+.users-empty strong{font-size:16px;color:#393329}.users-empty p{line-height:1.6;font-size:13px}
+@media(max-width:1000px){.users-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.users-filter{flex:1 1 130px}}
+@media(max-width:650px){#view-usuarios .heading{align-items:flex-start}.users-metrics{gap:10px}.users-metrics article{padding:16px}.users-metrics strong{font-size:28px}.users-metrics small{font-size:10px}.users-section-tag{font-size:10px}#view-usuarios .table-toolbar{flex-direction:row;padding:15px}.users-search-wrap{flex-basis:100%}.users-filter{flex:1 1 110px}.users-pagination{padding:14px}.users-pagination .meta{max-width:50%}}
+@media(prefers-reduced-motion:reduce){.app .view.active{animation:none}.app .nav-btn,.app .btn,#view-usuarios tbody tr,.users-metrics article{transition:none}.app .nav-btn:hover{transform:none}}
+@media(max-width:760px){.sidebar:not(.open){box-shadow:none}}
+.app,.app button,.app input,.app select,.app textarea{font-family:Arial,sans-serif}
+</style><style>/* Shared visual system across every authenticated section. */
+.app{--line:#e8e3d7;--canvas:#f8f7f2;--muted:#807868;--radius:16px}
+.app .content{padding:30px 32px 100px;max-width:1600px}
+.app .topbar{border-bottom-color:#eae5d9;box-shadow:0 3px 12px #28210903}
+.app .heading{margin-bottom:22px;align-items:center}
+.app .heading h2{font-size:27px;line-height:1.2;letter-spacing:-.035em}
+.app .heading p{font-size:13px;line-height:1.6;margin-top:7px}
+.app .card,.app .stat,.app .blacklist-stat,.app .talent-card,.app .profile-card,.app .form-card{border-color:#e8e3d7;border-radius:16px;box-shadow:0 3px 14px #28210903}
+.app .stat,.app .blacklist-stat{padding:21px}
+.app .stat-label{font-size:12px;color:#847c6a}
+.app .stat-value{letter-spacing:-.04em;color:#29241b;font-size:32px;margin-top:11px}
+.app .stat small{display:block;color:#8a816e;margin-top:5px;font-size:11px}
+.app .stats>.stat:first-child{background:#fff8d6;border-color:#eee0a3}
+.app .card h3{font-size:17px;line-height:1.35;letter-spacing:-.015em}
+.app .btn{font-size:12px;border-radius:10px;min-height:42px;padding:11px 15px}
+.app .btn-primary{background:#ffd21c;color:#282007}
+.app .btn-primary:hover{background:#ffda3d}
+.app .btn-secondary{background:#f5f2e9;border:1px solid #e8e1d1;color:#5c5340}
+.app .text-link{font-size:12px;text-underline-offset:3px}
+.app .text-link:hover{text-decoration:underline}
+.app .search,.app .field input,.app .field select,.app .field textarea{background:#fdfcf9;border:1px solid #ddd6c8;border-radius:10px;font-size:13px;padding:12px;min-height:44px;color:#494133}
+.app input:focus,.app select:focus,.app textarea:focus{outline:none;border-color:#b69a2b;box-shadow:0 0 0 3px #ffd21c24}
+.app .field label{font-size:12px;color:#655c4a}
+.app .table-wrap{border-radius:16px;border-color:#e8e3d7;overflow-x:auto;scrollbar-width:thin}
+.app th{background:#faf8f1;color:#8b816c;font-size:10px;padding:15px 17px}
+.app td{font-size:12px;padding:17px;border-bottom-color:#f0ece3;line-height:1.5}
+.app tbody tr:hover{background:#fffdf5}
+.app .meta{line-height:1.6}
+.app .notice{line-height:1.6;font-size:12px;border:1px solid #f2e9b5;border-radius:13px}
+.app #backup-notice{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;padding:12px 16px;margin-bottom:25px}
+.app #backup-notice .btn{margin-left:auto;flex-shrink:0}
+.app .empty,.suite-empty{border:1px dashed #ded6c4;background:#fffdf7;padding:34px 20px;border-radius:14px;text-align:center;color:#8c816e;grid-column:1/-1}
+.suite-empty>span{display:block;font-size:27px;color:#c1ac70;margin-bottom:12px}
+.suite-empty strong{font-size:15px;color:#65573e;font-weight:700;display:block}
+.suite-empty p{font-size:12px;line-height:1.6;margin:8px 0 0}
+.suite-toolbar{display:flex;align-items:end;flex-wrap:wrap;gap:12px;padding:17px 19px;background:white;border:1px solid #e8e2d5;border-radius:14px;margin:16px 0}
+.suite-toolbar label{display:flex;flex-direction:column;gap:7px;font-size:11px;color:#81745d;font-weight:700;flex:1 1 150px}
+.suite-toolbar input,.suite-toolbar select,.suite-inline-label select,.suite-date-label input{border:1px solid #e0d7c5;background:#fdfcf9;border-radius:9px;min-height:44px;padding:10px 12px;font:12px Arial,sans-serif;color:#5e5038;width:100%;min-width:0}
+.suite-date-label,.suite-inline-label{display:flex;flex-direction:column;gap:6px;font-size:11px;color:#81745d}
+.suite-pages{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:16px 0;color:#91836c;font-size:11px}
+.suite-pages>div{display:flex;align-items:center;gap:10px}
+.suite-pages .btn{font-size:11px;min-height:36px;padding:8px 12px}
+.suite-chips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.suite-chips span{border-radius:99px;padding:7px 12px;background:#f1ece0;border:1px solid #e9e0cf;font-size:11px;color:#82704b}
+.suite-file-tag{display:inline-flex;padding:4px 6px;border-radius:5px;background:#fff3d8;color:#9b742c;font-size:9px;font-weight:800;margin-right:6px}
+.suite-maintenance{padding:15px 18px;border:1px solid #e9e0cb;border-radius:12px;background:#fffaf0;margin:16px 0;font-size:12px;line-height:1.7;color:#8c754b}
+.suite-maintenance summary,.suite-backup-help summary{cursor:pointer;font-size:12px;font-weight:700;color:#8b742f;padding:5px 0}
+.suite-maintenance>strong{display:none}.suite-backup-help p{font-size:12px;line-height:1.65}
+.content:has(#view-memoria.active) #backup-notice{display:none}
+.suite-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 30px}
+.suite-quick{display:block;text-align:left;padding:20px;border-radius:15px;background:white;border:1px solid #e5dfd0;color:#6d5c3e;transition:transform .15s,box-shadow .15s}
+.suite-quick:hover{transform:translateY(-2px);box-shadow:0 6px 18px #58431009;border-color:#d8c890}
+.suite-quick>span{display:block;font-size:12px;font-weight:700}
+.suite-quick strong{display:block;font:800 29px Arial,sans-serif;margin:9px 0;color:#40331d}
+.suite-quick small{display:flex;justify-content:space-between;gap:10px;font-size:11px;line-height:1.5;color:#99876a}
+.suite-offline{display:inline-flex;padding:6px 9px;border-radius:7px;background:#fff1df;color:#956027;font-size:11px}
+.notify-btn svg{width:20px;height:20px}
+.suite-nav-scrim{position:fixed;inset:0;z-index:14;background:#19171366;border:0;backdrop-filter:blur(2px)}
+.suite-board-tools{display:flex;justify-content:space-between;gap:15px;margin-bottom:18px;align-items:center}
+.suite-board-tools label{display:flex;gap:10px;align-items:center;color:#8b7b5e;font-size:12px}
+.suite-board-tools select{border:1px solid #e1d8c5;background:#fff;border-radius:9px;padding:9px;font-size:12px;color:#665432}
+.app .column{border:1px solid #e5dece;border-radius:14px;min-height:320px;overflow:hidden}
+.app .column-head{background:#f4f0e6;font-size:11px;padding:17px 14px}
+.app .column-body{min-height:280px;max-height:65dvh;overflow-y:auto;scrollbar-width:thin;padding:0 10px 12px}
+.app .candidate{border-radius:11px;border-color:#e8dfcc;box-shadow:0 2px 7px #29210b04;margin-top:8px}
+.app .candidate:hover{box-shadow:0 5px 14px #29210b0b;transform:translateY(-1px)}
+.suite-compact .candidate-meta,.suite-compact .candidate .completion,.suite-compact .candidate .tag{display:none}
+.suite-compact .candidate{padding:10px}.suite-compact .candidate-avatar{height:31px;width:31px}.suite-compact .candidate strong{font-size:12px}
+.app .pro-toolbar{border-radius:16px;border-color:#e8dfce;box-shadow:0 2px 12px #47340a03}
+.app .pro-toolbar>label{display:grid;gap:8px;font-size:12px;font-weight:700;color:#81735c}
+.app .pro-toolbar>label select{min-height:44px;width:100%;padding:10px;border:1px solid #ded5c3;border-radius:9px;background:#fff;color:#6c5b3d;font-size:12px}
+.app .job.pro-job{border-top:3px solid #f1cf49;border-radius:15px}
+.app .pro-job h3{font-size:19px}.app .pro-summary{font-size:13px;line-height:1.7}
+.app .pro-tags span{font-size:10px;border-radius:6px;background:#f7f1e4;color:#8c744d}
+.app .talent-card{display:flex;flex-direction:column;padding:22px}
+.app .talent-card .candidate-actions{margin-top:auto;padding-top:20px}
+.app .talent-card .completion{margin-top:22px}
+.app .skill-chip{font-size:10px;background:#fff6ce;color:#8b7027}
+.suite-status{display:inline-flex;align-self:flex-start;border-radius:6px;background:#ecf5e9;color:#5b7752;font-size:10px;padding:5px 8px}
+.suite-status.muted{background:#f1ece5;color:#988571}
+.app .polish-interview{padding:22px}.app .polish-interview-title h3{font-size:19px}
+.app .polish-interview-details{background:#f8f5ed;border:1px solid #f0e8d7;padding:15px}
+.app .polish-calendar{border-color:#e7dba9}.app .polish-calendar span{background:#ffe580}
+.app .analytics-track{height:10px;background:#f2ecdd;border-radius:99px;overflow:hidden}
+.app .analytics-track span{background:linear-gradient(90deg,#ffd21c,#e5b823);border-radius:99px;animation:suite-bar-in .3s ease-out;transform-origin:left}
+@keyframes suite-bar-in{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.suite-note-detail{max-width:260px;min-width:135px;color:#867453;font-size:12px}
+.suite-note-detail summary{cursor:pointer;color:#8a6a20;font-weight:700;min-height:32px;display:list-item}
+.suite-note-detail p{white-space:pre-wrap;overflow-wrap:anywhere;background:#faf5e7;padding:10px;border-radius:8px;line-height:1.6}
+.app .privacy-note{border-color:#eddbc8;background:#fff9ef;color:#96724d;font-size:12px;line-height:1.6}
+.app .profile-progress,.app .progress-line{height:7px;background:#f1eadb}
+.app .profile-progress span,.app .progress-line span{transition:width .2s}
+.app .profile-card{align-self:start}.app .form-card{padding:27px}
+.app .profile-card .cv-box{border-color:#ddd0ad;background:#fffdf6;line-height:1.6}
+.suite-form-status{margin:18px 0 0;font-size:12px;color:#7d6a40;line-height:1.6;min-height:20px}
+.modal-card,dialog.pro-detail,dialog.polish-confirm{border:1px solid #e6dfcf;box-shadow:0 25px 80px #251b122b}
+.modal-card{max-height:calc(100dvh - 40px);overflow-y:auto;border-radius:20px}
+.modal-card .field input,.modal-card .field select,.modal-card .field textarea,dialog.pro-detail .field input,dialog.pro-detail .field select,dialog.pro-detail .field textarea{min-height:44px;padding:12px;border:1px solid #ddd3c0;border-radius:10px;background:#fdfbf7;font:13px Arial,sans-serif;color:#58462a}
+.modal-card .field label,dialog.pro-detail .field label{font-size:12px;color:#7c6849}
+.modal-card .field input:focus,.modal-card .field select:focus,.modal-card .field textarea:focus,dialog.pro-detail .field input:focus,dialog.pro-detail .field select:focus,dialog.pro-detail .field textarea:focus{border-color:#b69a2b;box-shadow:0 0 0 3px #ffd21c24;outline:none}
+.modal-card .modal-actions{padding-top:16px;border-top:1px solid #eee6d7}
+.modal-card .btn,dialog.pro-detail .btn{border-radius:10px;min-height:44px;font-size:12px}
+.modal-card .form-msg,dialog.pro-detail .form-msg{line-height:1.6}
+.modal-head h3{letter-spacing:-.025em}
+.app .notification-panel{border-radius:15px;border-color:#e4dac7;box-shadow:0 16px 45px #3223091c}
+.app .notification-item.unread{background:#fffae9}
+@media(min-width:761px){.suite-nav-scrim{display:none}}
+@media(max-width:1100px){.suite-summary{grid-template-columns:1fr 1fr}.suite-summary .suite-quick:last-child{grid-column:1/-1}.app .heading{align-items:flex-start;flex-wrap:wrap}}
+@media(max-width:760px){.app .content{padding:22px 15px 96px}.app .heading h2{font-size:24px}.app .heading p{font-size:12px}.app .stats{gap:10px}.app .stat{padding:17px}.app .stat-value{font-size:27px}.app .card,.app .talent-card{padding:18px}.suite-pages{align-items:flex-start;flex-wrap:wrap}.suite-pages>div{margin-left:auto}.suite-toolbar{padding:15px}.suite-summary{gap:10px}.suite-quick{padding:16px}.suite-quick small{font-size:10px}.app #backup-notice .btn{margin-left:0}.app .table-wrap table{min-width:620px}#view-memoria .table-wrap table{min-width:500px}.app .column-body{max-height:60dvh}.suite-board-tools{flex-wrap:wrap}.suite-board-tools select{max-width:180px}.app .form-card{padding:20px}.app .users-row-actions select{min-height:44px}.app .users-row-actions .delete-btn{width:40px;min-height:44px}#ym-launch{font-size:0;width:48px;height:48px;padding:0}#ym-launch::before{content:'?';font:800 22px Arial,sans-serif}.suite-chips{gap:6px}.polish-audit-tools .suite-date-label{width:calc(50% - 6px)}}
+@media(prefers-reduced-motion:reduce){.suite-quick,.app .profile-progress span,.app .progress-line span{transition:none}.suite-quick:hover{transform:none}.app .analytics-track span{animation:none}}
+</style></head>
 <body>
 <a class="skip-link" href="#main-content">Saltar al contenido</a>
   <section id="auth" class="auth">
@@ -189,12 +393,12 @@ dialog.pdf-pro{width:min(1200px,96vw);max-width:none;height:92dvh;max-height:96d
     $('#register-form').onsubmit=async e=>{e.preventDefault();const msg=$('#register-msg'),button=e.submitter,name=$('#register-name').value.trim(),identifier=normalizeIdentifier($('#register-identifier').value),password=$('#register-password').value;button.disabled=true;try{await sessionReady;if(!registrationPrivacyAccepted||password.length<8){msg.textContent='Acepta el aviso y utiliza una contraseña de al menos 8 caracteres.';msg.className='form-msg error';return;}if(identifier.length<3)throw new Error('El usuario debe tener al menos 3 caracteres.');const phone=normalizeWhatsAppPhone($('#register-phone').value);if(!phone){msg.textContent='Escribe un teléfono válido con + y código de país.';msg.className='form-msg error';return;}const credential=await createUserWithEmailAndPassword(auth,authEmail(identifier),password),user={id:credential.user.uid,nombre:name,usuario:identifier,telefono:phone,rol:'usuario',activo:true,creadoEn:new Date().toISOString(),privacyAcceptance:{version:'2026-09-14-v2',accepted:true,acceptedAt:new Date().toISOString()}};await setDoc(doc(db,'users',user.id),user);currentProfile=user;msg.textContent='Cuenta creada. Ingresando…';msg.className='form-msg success';launch();$('#registration-success').showModal()}catch(err){msg.textContent=err.message?.startsWith('El usuario')?err.message:authError(err);msg.className='form-msg error'}finally{button.disabled=false}};
     $('#logout').onclick=()=>secureLogout();
     function launch(){if(sessionClosing||!auth.currentUser||!currentProfile||currentProfile.activo===false)return;lastActivity=Date.now();proReset();const admin=currentProfile.rol==='admin';$('#auth').classList.add('hidden');$('#app').classList.remove('hidden');$('#account-name').textContent=currentProfile.nombre||currentProfile.usuario;$('#account-role').textContent=admin?'Administrador':'Talento';$('#avatar').textContent=(currentProfile.nombre||currentProfile.usuario||'U').charAt(0).toUpperCase();$$('.admin-only').forEach(el=>el.classList.toggle('hidden',!admin));$$('.normal-only').forEach(el=>el.classList.toggle('hidden',admin));subscribe(admin);showView(admin?'resumen':'perfil')}
-    function subscribe(admin){documentUsersReady=false;cloudUnsubs.forEach(fn=>fn());cloudUnsubs=[];cloudReady=false;const receive=(name,snapshot)=>{if(!currentProfile||!auth.currentUser||sessionClosing)return;const data=snapshot.docs.map(item=>({...item.data(),id:item.id}));if(name==='users'){const own=data.find(u=>u.id===auth.currentUser.uid);if(!own||own.activo===false||own.rol!==currentProfile.rol){secureLogout('Tu acceso cambió. Inicia sesión nuevamente.');return;}}cloudBaseline[name]=new Map(data.map(item=>[item.id,cloudClean(item)]));if(name==='users'){documentUsersReady=true;users=data;const own=users.find(u=>u.id===auth.currentUser?.uid);if(own)currentProfile=own}else if(name==='jobs'){jobs=data;proJobsStatus='ready';}else if(name==='candidates'){candidates=data;proCandidatesStatus='ready';}else if(name==='blacklist')blacklist=data;else notifications=data;cloudReady=true;renderAll()};cloudUnsubs.push(onSnapshot(admin?collection(db,'users'):doc(db,'users',currentProfile.id),s=>receive('users',admin?s:{docs:s.exists()?[s]:[]}),()=>secureLogout('No se pudo verificar tu acceso. Inicia sesión nuevamente.')));cloudUnsubs.push(onSnapshot(collection(db,'vacantes'),s=>receive('jobs',s),err=>{console.error(err);proJobsStatus='error';renderJobs()}));cloudUnsubs.push(onSnapshot(admin?collection(db,'candidates'):query(collection(db,'candidates'),where('userId','==',currentProfile.id),where('privacySchema','==',2)),s=>receive('candidates',s),err=>{console.error(err);proCandidatesStatus='error';renderKanban()}));if(admin)cloudUnsubs.push(onSnapshot(collection(db,'blacklist'),s=>receive('blacklist',s),console.error));cloudUnsubs.push(onSnapshot(query(collection(db,'notifications'),where('userId','==',currentProfile.id)),s=>receive('notifications',s),console.error));opsSubscribe(admin);renderAll();if(admin){renderUsers();$('#admin-code-display').textContent='Gestionado por permisos'}}
+    function subscribe(admin){documentUsersReady=false;cloudUnsubs.forEach(fn=>fn());cloudUnsubs=[];cloudReady=false;const receive=(name,snapshot)=>{if(!currentProfile||!auth.currentUser||sessionClosing)return;const data=snapshot.docs.map(item=>({...item.data(),id:item.id}));if(name==='users'){const own=data.find(u=>u.id===auth.currentUser.uid);if(!own||own.activo===false||own.rol!==currentProfile.rol){secureLogout('Tu acceso cambió. Inicia sesión nuevamente.');return;}}cloudBaseline[name]=new Map(data.map(item=>[item.id,cloudClean(item)]));if(name==='users'){documentUsersReady=true;users=data;const own=users.find(u=>u.id===auth.currentUser?.uid);if(own)currentProfile=own}else if(name==='jobs'){jobs=data;proJobsStatus='ready';}else if(name==='candidates'){candidates=data;proCandidatesStatus='ready';}else if(name==='blacklist')blacklist=data;else notifications=data;cloudReady=true;renderAll()};cloudUnsubs.push(onSnapshot(admin?collection(db,'users'):doc(db,'users',currentProfile.id),s=>receive('users',admin?s:{docs:s.exists()?[s]:[]}),()=>secureLogout('No se pudo verificar tu acceso. Inicia sesión nuevamente.')));cloudUnsubs.push(onSnapshot(collection(db,'vacantes'),s=>receive('jobs',s),err=>{console.error(err);proJobsStatus='error';renderJobs()}));cloudUnsubs.push(onSnapshot(admin?collection(db,'candidates'):query(collection(db,'candidates'),where('userId','==',currentProfile.id),where('privacySchema','==',2)),s=>receive('candidates',s),err=>{console.error(err);proCandidatesStatus='error';renderKanban()}));if(admin)cloudUnsubs.push(onSnapshot(collection(db,'blacklist'),s=>receive('blacklist',s),console.error));cloudUnsubs.push(onSnapshot(query(collection(db,'notifications'),where('userId','==',currentProfile.id)),s=>receive('notifications',s),console.error));opsSubscribe(admin);renderAll();if(admin){renderUsers();void 0}}
     function renderAll(){renderDocumentMemory();renderJobs();renderKanban();decorateCandidateCards();markBlacklistMatches();updateStats();renderNotifications();renderAnalytics();renderOperations();if(currentProfile?.rol==='admin'){renderUsers();renderTalent();renderBlacklist()}else renderProfile()}
     function showView(name){if(['memoria','resumen','usuarios','talento','lista-negra','estadisticas','actividad'].includes(name)&&currentProfile?.rol!=='admin')return;if(name==='perfil'&&currentProfile?.rol==='admin')return;$$('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));$$('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===name));$('#page-title').textContent={memoria:'Memoria y copias',agenda:'Agenda de entrevistas',actividad:'Actividad administrativa',estadisticas:'Estadísticas de reclutamiento',resumen:'Resumen administrativo',perfil:'Mi perfil profesional',vacantes:'Vacantes',seguimiento:'Seguimiento',talento:'Directorio de talento','lista-negra':'Lista de exclusión',usuarios:'Usuarios'}[name];$('#sidebar').classList.remove('open')}
     $$('.nav-btn').forEach(b=>b.onclick=()=>showView(b.dataset.view));$$('[data-go]').forEach(b=>b.onclick=()=>showView(b.dataset.go));$('#mobile-menu').onclick=()=>$('#sidebar').classList.toggle('open');
     function originalJobCard(v){const applied=candidates.some(c=>c.vacanteId===v.id&&c.userId===currentProfile?.id),action=currentProfile?.rol==='admin'?`<div class="job-actions"><button class="text-link" data-track>Ver seguimiento →</button><button class="delete-btn" data-delete-job="${v.id}" title="Eliminar vacante" aria-label="Eliminar ${escapeHtml(v.titulo)}">×</button></div>`:`<button class="btn ${applied?'btn-secondary':'btn-primary'}" data-apply="${v.id}" ${applied?'disabled':''}>${applied?'Postulación enviada':'Postularme'}</button>`,details=[v.descripcion?`<div class="job-detail"><strong>Acerca del puesto</strong><p>${escapeHtml(v.descripcion)}</p></div>`:'',v.funciones?`<div class="job-detail"><strong>Funciones a desarrollar</strong><p>${escapeHtml(v.funciones)}</p></div>`:'',v.requisitos?`<div class="job-detail"><strong>Perfil solicitado</strong><p>${escapeHtml(v.requisitos)}</p></div>`:''].join('');return `<article class="card job"><div class="job-top"><span class="pill">${escapeHtml(v.depto||'General')}</span><span class="meta">${Number(v.vacantesCount)||1} plaza(s)</span></div><h3>${escapeHtml(v.titulo)}</h3><div class="meta">⌖ ${escapeHtml(v.ubicacion||'Por definir')} ${v.modalidad?`· <span class="job-modality">${escapeHtml(v.modalidad)}</span>`:''}</div><div class="job-details">${details}</div><div class="card-footer"><span>${candidates.filter(c=>c.vacanteId===v.id||c.puesto===v.titulo).length} candidatos</span>${action}</div></article>`}
-    function originalRenderJobs(){const html=jobs.length?jobs.map(jobCard).join(''):'<div class="empty">Aún no hay vacantes registradas.</div>';$('#job-list').innerHTML=html;$('#recent-jobs').innerHTML=jobs.length?jobs.slice(0,3).map(jobCard).join(''):'<div class="empty">Aún no hay vacantes registradas.</div>';$$('[data-track]').forEach(b=>b.onclick=()=>showView('seguimiento'));$$('[data-apply]').forEach(b=>b.onclick=()=>applyToJob(b.dataset.apply));const options=jobs.map(v=>`<option value="${escapeHtml(v.id)}">${escapeHtml(v.titulo)}</option>`).join('');$('#candidate-job').innerHTML=jobs.length?'<option value="">Selecciona una vacante</option>'+options:'<option value="">Primero crea una vacante</option>';const filter=$('#pipeline-job-filter'),selected=filter.value;filter.innerHTML='<option value="">Todas las vacantes</option>'+options;filter.value=selected}
+    function originalRenderJobs(){$('#recent-jobs').innerHTML=jobs.length?jobs.slice(0,3).map(jobCard).join(''):'<div class="empty">Aún no hay vacantes registradas.</div>';$$('[data-track]').forEach(b=>b.onclick=()=>showView('seguimiento'));$$('[data-apply]').forEach(b=>b.onclick=()=>applyToJob(b.dataset.apply));const options=jobs.map(v=>`<option value="${escapeHtml(v.id)}">${escapeHtml(v.titulo)}</option>`).join('');$('#candidate-job').innerHTML=jobs.length?'<option value="">Selecciona una vacante</option>'+options:'<option value="">Primero crea una vacante</option>';const filter=$('#pipeline-job-filter'),selected=filter.value;filter.innerHTML='<option value="">Todas las vacantes</option>'+options;filter.value=selected}
     async function originalApplyToJob(jobId){const job=jobs.find(v=>v.id===jobId);if(!job){toast('No se encontró la vacante');return}if(job.estado==='cerrada'){toast('Esta vacante está cerrada y ya no recibe postulaciones');return}if(!auth.currentUser){toast('Tu sesión venció. Ingresa nuevamente');return}if(candidates.some(c=>c.vacanteId===jobId&&c.userId===currentProfile.id)){toast('Ya enviaste una postulación para esta vacante');return}const button=$(`[data-apply="${jobId}"]`),application={id:id(),privacySchema:2,nombre:currentProfile.nombre,email:currentProfile.telefono||currentProfile.usuario,vacanteId:jobId,puesto:job.titulo,etapa:'nuevo',userId:auth.currentUser.uid,cvDisponible:Boolean(currentProfile.cvData),creadoEn:new Date().toISOString()};if(button){button.disabled=true;button.textContent='Enviando…'}try{await setDoc(doc(db,'candidates',application.id),cloudClean(application));cloudBaseline.candidates.set(application.id,cloudClean(application));candidates.push(application);addNotification(currentProfile.id,'Postulación recibida',`Recibimos tu postulación para ${job.titulo}.`,'application');renderAll();await syncCloudCollection('notifications',notifications);notifyAdmins('Nueva postulación',`${currentProfile.nombre} se postuló a ${job.titulo}.`,'application');toast('Postulación enviada correctamente')}catch(err){console.error('Error al postularse',err);if(button){button.disabled=false;button.textContent='Postularme'}const message=err.code==='permission-denied'?'Firebase rechazó la postulación. Revisa que las reglas estén publicadas.':err.code==='unavailable'?'No hay conexión con Firebase. Intenta nuevamente.':'No se pudo enviar la postulación. Intenta nuevamente.';toast(message)}}
     function originalRenderKanban(){const q=($('#pipeline-search')?.value||'').toLowerCase(),jobFilter=$('#pipeline-job-filter')?.value||'',base=currentProfile?.rol==='admin'?candidates:candidates.filter(c=>c.userId===currentProfile?.id),visible=base.filter(c=>(!q||`${c.nombre} ${c.puesto} ${c.email||''}`.toLowerCase().includes(q))&&(!jobFilter||c.vacanteId===jobFilter)),active=visible.filter(c=>!['contratado','descartado'].includes(c.etapa));$('#pipeline-summary').textContent=`${active.length} activos`;$('#pipeline-hired').textContent=`${visible.filter(c=>c.etapa==='contratado').length} contratados`;$('#pipeline-declined').textContent=`${visible.filter(c=>c.etapa==='descartado').length} no seleccionados`;$('#pipeline-description').textContent=currentProfile?.rol==='admin'?'Gestiona decisiones, motivos y trazabilidad en cada etapa.':'Consulta el avance y resultado de tus postulaciones.';const labels={nuevo:'Nuevo',revision:'En revisión',entrevista:'Entrevista',contratado:'Contratado',descartado:'No seleccionado'};['nuevo','revision','entrevista','contratado','descartado'].forEach(stage=>{const list=visible.filter(c=>c.etapa===stage),col=$(`#col-${stage}`);$(`#count-${stage}`).textContent=list.length;col.innerHTML=list.length?list.map(c=>{const user=users.find(u=>u.id===c.userId),pct=user?profileCompletion(user):0,date=c.creadoEn?new Intl.DateTimeFormat('es-MX',{day:'numeric',month:'short'}).format(new Date(c.creadoEn)):'Reciente',reason=stage==='descartado'&&c.motivoDescarte?`<div class="decline-reason"><strong>Motivo:</strong> ${escapeHtml(c.motivoDescarte)}${currentProfile?.rol==='admin'&&c.notaDescarte?`<br><span>Nota: ${escapeHtml(c.notaDescarte)}</span>`:''}</div>`:'';return `<article class="candidate" draggable="${currentProfile?.rol==='admin'}" data-id="${escapeHtml(c.id)}"><div class="candidate-top"><div class="candidate-avatar">${escapeHtml((c.nombre||'U')[0].toUpperCase())}</div><div class="candidate-info"><strong>${escapeHtml(c.nombre)}</strong><small>${escapeHtml(c.puesto)}</small></div></div><div class="candidate-meta"><span class="candidate-contact">${escapeHtml(c.email||'Sin contacto')}</span><span class="meta">${date}</span></div>${user?`<div class="completion">Perfil ${pct}% · ${user.cvName?'CV disponible':'Sin CV'}</div>`:''}${reason}${currentProfile?.rol==='admin'?`<select class="candidate-stage" data-stage-change="${c.id}">${Object.entries(labels).map(([key,label])=>`<option value="${key}" ${key===stage?'selected':''}>${label}</option>`).join('')}</select>`:''}</article>`}).join(''):'<div class="empty-column">No hay perfiles en esta etapa</div>';const wrapper=col.closest('.column');col.ondragover=e=>{if(currentProfile?.rol==='admin'){e.preventDefault();wrapper.classList.add('drag-over')}};col.ondragleave=()=>wrapper.classList.remove('drag-over');col.ondrop=e=>{wrapper.classList.remove('drag-over');if(currentProfile?.rol!=='admin')return;e.preventDefault();moveCandidate(e.dataTransfer.getData('text/plain'),stage)}});$$('.candidate').forEach(c=>{c.ondragstart=e=>{if(currentProfile?.rol==='admin'){c.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',c.dataset.id)}};c.ondragend=()=>{$$('.candidate').forEach(x=>x.classList.remove('dragging'));$$('.column').forEach(x=>x.classList.remove('drag-over'))}});$$('[data-stage-change]').forEach(s=>s.onchange=()=>moveCandidate(s.dataset.stageChange,s.value))}
     let pendingDeclineId=null;
@@ -447,7 +651,7 @@ privacyDialog.innerHTML=`<h2 id="privacy-title" tabindex="-1">Aviso de privacida
 <div class="privacy-body">${privacyNoticeHtml}
 </div><div class="privacy-actions"><button type="button" class="btn btn-primary" data-privacy-close>Cerrar</button><div class="privacy-decision hidden"><button type="button" class="btn btn-secondary" id="privacy-decline">No aceptar</button><button type="button" class="btn btn-primary" id="privacy-accept">Aceptar</button></div></div>`;
 document.body.append(privacyDialog);
-document.querySelectorAll('.registration-privacy').forEach(el=>{el.innerHTML='<strong>Aviso de privacidad</strong>'+privacyNoticeHtml.replace(' id="privacy-owner"','');});
+document.querySelectorAll('#register-form .registration-privacy, #view-perfil > .registration-privacy').forEach(el=>el.remove());
 privacyDialog.querySelector('[data-privacy-close]').onclick=()=>privacyDialog.close();
 document.querySelector('.auth-card').insertAdjacentHTML('beforeend','<p class="privacy-footer">Por seguridad, la sesión termina tras 15 minutos sin actividad y al recargar o cerrar esta página.</p>');
 document.querySelector('.account').insertAdjacentHTML('beforeend','<button type="button" class="link-btn" data-privacy-open>Privacidad y confidencialidad</button>');
@@ -514,6 +718,233 @@ document.querySelector('#privacy-migrate').onclick=async function(){
   finally{this.disabled=false;}
 };
 
+
+
+// Users: client-side search and pagination; no additional profile queries.
+const usersView=document.querySelector('#view-usuarios');
+const obsoleteAccess=usersView.querySelector('.access-panel');
+if(obsoleteAccess){if(obsoleteAccess.nextElementSibling?.classList.contains('notice'))obsoleteAccess.nextElementSibling.remove();obsoleteAccess.remove();}
+usersView.querySelector('.heading').insertAdjacentHTML('beforeend','<span class="users-section-tag">Administración de accesos</span>');
+usersView.querySelector('.heading').insertAdjacentHTML('afterend',`<div class="users-metrics" aria-label="Resumen de cuentas">
+<article><span>Cuentas registradas</span><strong id="users-stat-total">0</strong><small>En la plataforma</small></article>
+<article><span>Administradores</span><strong id="users-stat-admin">0</strong><small>Con permisos de gestión</small></article>
+<article><span>Cuentas activas</span><strong id="users-stat-active">0</strong><small>Acceso habilitado</small></article>
+<article><span>Cuentas inactivas</span><strong id="users-stat-inactive">0</strong><small>Acceso deshabilitado</small></article></div>
+<p class="users-access-note">Los permisos se asignan por cuenta. Tu propia cuenta está protegida frente a cambios desde esta tabla.</p>
+<p id="users-feedback" class="users-feedback hidden" role="status" aria-live="polite"></p>`);
+usersView.querySelector('.table-toolbar').innerHTML=`<div class="users-search-wrap"><label for="user-search">Buscar una cuenta</label><input class="search" id="user-search" type="search" autocomplete="off" placeholder="Nombre o usuario…"></div>
+<div class="users-filter"><label for="users-role-filter">Rol</label><select id="users-role-filter"><option value="all">Todos los roles</option><option value="admin">Administradores</option><option value="usuario">Usuarios</option></select></div>
+<div class="users-filter"><label for="users-state-filter">Estado</label><select id="users-state-filter"><option value="all">Todos los estados</option><option value="active">Activos</option><option value="inactive">Inactivos</option></select></div>
+<div class="users-filter"><label for="users-sort">Orden</label><select id="users-sort"><option value="asc">Nombre: A–Z</option><option value="desc">Nombre: Z–A</option></select></div>`;
+const usersTable=usersView.querySelector('table');
+usersTable.setAttribute('aria-label','Usuarios y permisos');
+usersTable.querySelectorAll('th').forEach(th=>th.scope='col');
+usersTable.querySelectorAll('th')[4].textContent='Gestionar acceso';
+const usersTableScroll=document.createElement('div');usersTableScroll.className='users-table-scroll';usersTableScroll.tabIndex=0;usersTableScroll.setAttribute('role','region');usersTableScroll.setAttribute('aria-label','Tabla de usuarios, desplazable horizontalmente');usersTable.before(usersTableScroll);usersTableScroll.append(usersTable);
+usersView.querySelector('.table-wrap').insertAdjacentHTML('beforeend',`<div class="users-pagination"><span class="meta" id="user-total" role="status"></span><div><button class="btn btn-secondary" id="users-prev" type="button" aria-label="Página anterior">←</button><span id="users-page-label"></span><button class="btn btn-secondary" id="users-next" type="button" aria-label="Página siguiente">→</button></div></div>`);
+const userPending=new Set();let usersPage=1,usersLastRender='',usersSearchTimer=null;
+const usersPerPage=12;
+const normalizeUserSearch=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es').trim();
+function usersMessage(message,error=false){const el=document.querySelector('#users-feedback');el.textContent=message;el.classList.remove('hidden');el.classList.toggle('is-error',error);}
+renderUsers=function(){
+  if(currentProfile?.rol!=='admin')return;
+  const q=normalizeUserSearch(document.querySelector('#user-search').value),role=document.querySelector('#users-role-filter').value,state=document.querySelector('#users-state-filter').value,sort=document.querySelector('#users-sort').value;
+  // Ignore unrelated snapshot changes and CV updates: the table does not display those fields.
+  const signature=JSON.stringify([users.map(u=>[u.id,u.nombre,u.usuario,u.rol,u.activo]),q,role,state,sort,usersPage,[...userPending],currentProfile.id]);
+  if(signature===usersLastRender)return;
+  usersLastRender=signature;
+  const active=users.filter(u=>u.activo!==false).length;
+  document.querySelector('#users-stat-total').textContent=users.length;
+  document.querySelector('#users-stat-admin').textContent=users.filter(u=>u.rol==='admin').length;
+  document.querySelector('#users-stat-active').textContent=active;
+  document.querySelector('#users-stat-inactive').textContent=users.length-active;
+  const filtered=users.filter(u=>(!q||normalizeUserSearch(`${u.nombre} ${u.usuario||''}`).includes(q))&&(role==='all'||(u.rol==='admin'?'admin':'usuario')===role)&&(state==='all'||(u.activo===false?'inactive':'active')===state)).sort((a,b)=>{const order=String(a.nombre||'').localeCompare(String(b.nombre||''),'es',{sensitivity:'base'});return (sort==='desc'?-order:order)||String(a.id).localeCompare(String(b.id));});
+  const pages=Math.max(1,Math.ceil(filtered.length/usersPerPage));usersPage=Math.min(usersPage,pages);
+  const offset=(usersPage-1)*usersPerPage,rows=filtered.slice(offset,offset+usersPerPage);
+  const focused=document.activeElement?.closest('[data-account-field]');
+  const focusKey=focused?[focused.dataset.accountId,focused.dataset.accountField]:null;
+  document.querySelector('#user-list').innerHTML=rows.length?rows.map(u=>{
+    const own=u.id===currentProfile.id,pending=userPending.has(u.id),isActive=u.activo!==false,isAdmin=u.rol==='admin',safeId=escapeHtml(u.id),name=u.nombre||'Sin nombre';
+    const initials=name.trim().split(/\s+/).slice(0,2).map(x=>Array.from(x)[0]||'').join('').toUpperCase();
+    return `<tr class="${pending?'user-saving':''}" aria-busy="${pending}"><td><div class="users-person"><span class="users-initials" aria-hidden="true">${escapeHtml(initials)}</span><div><strong>${escapeHtml(name)}</strong>${own?'<small>Tu cuenta</small>':''}</div></div></td><td class="users-handle">${escapeHtml(u.usuario||'Sin usuario')}</td><td><span class="users-badge ${isAdmin?'is-admin':''}">${isAdmin?'Administrador':'Usuario'}</span></td><td><span class="users-state ${isActive?'is-active':'is-inactive'}"><i aria-hidden="true"></i>${isActive?'Activo':'Inactivo'}</span></td><td>${own?'<span class="users-protected">Cuenta protegida</span>':`<div class="users-row-actions"><select data-account-id="${safeId}" data-account-field="rol" aria-label="Rol de ${escapeHtml(name)}" ${pending?'disabled':''}><option value="usuario" ${!isAdmin?'selected':''}>Usuario</option><option value="admin" ${isAdmin?'selected':''}>Administrador</option></select><select data-account-id="${safeId}" data-account-field="activo" aria-label="Estado de ${escapeHtml(name)}" ${pending?'disabled':''}><option value="true" ${isActive?'selected':''}>Activo</option><option value="false" ${!isActive?'selected':''}>Inactivo</option></select><button class="delete-btn" data-delete-user="${safeId}" title="Eliminar perfil" aria-label="Eliminar perfil de ${escapeHtml(name)}" ${pending?'disabled':''}>×</button></div>${pending?'<small class="users-saving-label">Guardando cambio…</small>':''}`}</td></tr>`;
+  }).join(''):'<tr><td colspan="5"><div class="users-empty"><strong>No encontramos cuentas</strong><p>Prueba otro nombre o ajusta los filtros.</p><button type="button" class="btn btn-secondary" id="users-clear">Limpiar filtros</button></div></td></tr>';
+  document.querySelector('#user-total').textContent=filtered.length?`${offset+1}–${offset+rows.length} de ${filtered.length} cuentas`:'0 cuentas';
+  document.querySelector('#users-page-label').textContent=`${usersPage} / ${pages}`;
+  document.querySelector('#users-prev').disabled=usersPage===1;document.querySelector('#users-next').disabled=usersPage===pages;
+  document.querySelectorAll('[data-account-field]').forEach(el=>el.onchange=()=>updateUserAccess(el.dataset.accountId,el.dataset.accountField,el.value));
+  document.querySelector('#users-clear')?.addEventListener('click',()=>{document.querySelector('#user-search').value='';document.querySelector('#users-role-filter').value='all';document.querySelector('#users-state-filter').value='all';usersPage=1;renderUsers();document.querySelector('#user-search').focus();});
+  bindDeleteButtons();
+  if(focusKey){const target=[...document.querySelectorAll('[data-account-field]')].find(el=>el.dataset.accountId===focusKey[0]&&el.dataset.accountField===focusKey[1]);if(target&&!target.disabled)target.focus({preventScroll:true});}
+};
+async function updateUserAccess(userId,field,value){
+  if(!opsAdmin()||userId===currentProfile.id||userPending.has(userId)||!['rol','activo'].includes(field))return;
+  if(field==='rol'&&!['admin','usuario'].includes(value))return;
+  if(field==='activo'&&!['true','false'].includes(value))return;
+  const actorId=currentProfile.id,record=users.find(u=>u.id===userId),baselineAtStart=cloudBaseline.users.get(userId);if(!record)return;
+  const nextValue=field==='activo'?value==='true':value;
+  userPending.add(userId);usersMessage(`Guardando acceso de ${record.nombre||record.usuario}…`);renderUsers();
+  try{
+    const updated=await runTransaction(db,async transaction=>{
+      if(!opsAdmin()||currentProfile.id!==actorId)throw Error('La sesión cambió');
+      const ref=doc(db,'users',userId),snapshot=await transaction.get(ref);
+      if(!snapshot.exists())throw Error('El perfil ya no existe');
+      const latest=snapshot.data(),next={...latest,id:userId,[field]:nextValue};
+      transaction.set(ref,cloudClean(next));
+      opsAddAudit(transaction,field==='rol'?'Rol de cuenta actualizado':nextValue?'Acceso de cuenta activado':'Acceso de cuenta desactivado','users',userId,latest.nombre||latest.usuario,{field,previousValue:latest[field]??null,newValue:nextValue});
+      return next;
+    });
+    if(currentProfile?.id!==actorId||sessionClosing)return;
+    // A newer subscription snapshot takes precedence; otherwise mirror the complete transaction result.
+    if(cloudBaseline.users.get(userId)===baselineAtStart){users=users.map(u=>u.id===userId?updated:u);cloudBaseline.users.set(userId,cloudClean(updated));}
+    usersMessage(`Cambio guardado para ${updated.nombre||updated.usuario}.`);
+  }catch(error){if(currentProfile?.id===actorId&&!sessionClosing)usersMessage('No se pudo guardar el cambio. Se mantiene el acceso anterior; revisa la conexión y vuelve a intentarlo.',true);}
+  finally{userPending.delete(userId);if(currentProfile?.id===actorId&&!sessionClosing)renderUsers();}
+}
+document.querySelector('#user-search').oninput=()=>{clearTimeout(usersSearchTimer);usersSearchTimer=setTimeout(()=>{usersPage=1;renderUsers();},180);};
+['users-role-filter','users-state-filter','users-sort'].forEach(id=>document.querySelector('#'+id).onchange=()=>{usersPage=1;renderUsers();});
+document.querySelector('#users-prev').onclick=()=>{usersPage=Math.max(1,usersPage-1);renderUsers();};
+document.querySelector('#users-next').onclick=()=>{usersPage++;renderUsers();};
+window.addEventListener('yello-session-change',()=>{clearTimeout(usersSearchTimer);usersLastRender='';usersPage=1;});
+
+
+// Shared UI helpers. All filtering is local to records already authorized by Firebase.
+const suiteVisible=name=>document.querySelector('#view-'+name)?.classList.contains('active');
+const suiteText=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es').trim();
+const suiteTimers=new Map();
+function suiteDebounce(key,fn){clearTimeout(suiteTimers.get(key));suiteTimers.set(key,setTimeout(()=>{suiteTimers.delete(key);if(currentProfile&&!sessionClosing)fn();},180));}
+function suiteEmpty(message){return '<div class="suite-empty"><span aria-hidden="true">—</span><strong>'+escapeHtml(message)+'</strong><p>Ajusta los filtros o vuelve cuando haya nuevos registros.</p></div>';}
+function suitePager(id,parent){const el=document.createElement('nav');el.className='suite-pages';el.setAttribute('aria-label','Páginas de resultados');el.innerHTML=`<span id="${id}-count" role="status"></span><div><button class="btn btn-secondary" id="${id}-prev" type="button">Anterior</button><span id="${id}-page"></span><button class="btn btn-secondary" id="${id}-next" type="button">Siguiente</button></div>`;parent.after(el);return {page:1,size:12,id,el};}
+function suiteSlice(items,pager,render){const pages=Math.max(1,Math.ceil(items.length/pager.size));pager.page=Math.min(Math.max(1,pager.page),pages);const start=(pager.page-1)*pager.size;document.querySelector('#'+pager.id+'-count').textContent=items.length?`${start+1}–${Math.min(start+pager.size,items.length)} de ${items.length} resultados`:'Sin resultados';document.querySelector('#'+pager.id+'-page').textContent=`${pager.page} / ${pages}`;const prev=document.querySelector('#'+pager.id+'-prev'),next=document.querySelector('#'+pager.id+'-next');prev.disabled=pager.page<=1;next.disabled=pager.page>=pages;prev.onclick=()=>{pager.page--;render();};next.onclick=()=>{pager.page++;render();};return items.slice(start,start+pager.size);}
+function suiteToolbar(before,html){const el=document.createElement('div');el.className='suite-toolbar';el.innerHTML=html;before.before(el);return el;}
+function suiteInput(id,label,placeholder='Buscar…',type='search'){return `<label>${label}<input type="${type}" id="${id}" placeholder="${placeholder}"></label>`;}
+function suiteSelect(id,label,options){return `<label>${label}<select id="${id}">${options.map(([v,t])=>`<option value="${v}">${t}</option>`).join('')}</select></label>`;}
+function suiteBind(ids,pager,render){ids.forEach(id=>{const el=document.querySelector('#'+id);el.addEventListener(el.type==='search'?'input':'change',()=>{if(pager)pager.page=1;if(el.type==='search')suiteDebounce(id,render);else render();});});}
+
+// Navigation, clear icons and an offline indicator (not a Firebase connection claim).
+const bell=document.createElementNS('http://www.w3.org/2000/svg','svg');bell.setAttribute('viewBox','0 0 24 24');bell.setAttribute('aria-hidden','true');bell.innerHTML='<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>';document.querySelector('#notification-btn').firstChild.replaceWith(bell);
+const offline=document.createElement('span');offline.className='suite-offline hidden';offline.textContent='Sin conexión';offline.setAttribute('role','status');document.querySelector('.top-actions').prepend(offline);
+function suiteConnection(){offline.classList.toggle('hidden',navigator.onLine);}
+window.addEventListener('online',suiteConnection);window.addEventListener('offline',suiteConnection);suiteConnection();
+const scrim=document.createElement('button');scrim.type='button';scrim.className='suite-nav-scrim hidden';scrim.setAttribute('aria-label','Cerrar menú');document.body.append(scrim);
+function suiteCloseMenu(){document.querySelector('#sidebar').classList.remove('open');scrim.classList.add('hidden');document.querySelector('#mobile-menu').setAttribute('aria-expanded','false');}
+document.querySelector('#mobile-menu').onclick=()=>{const open=document.querySelector('#sidebar').classList.toggle('open');scrim.classList.toggle('hidden',!open);document.querySelector('#mobile-menu').setAttribute('aria-expanded',String(open));};
+scrim.onclick=suiteCloseMenu;document.addEventListener('keydown',e=>{if(e.key==='Escape')suiteCloseMenu();});
+document.querySelector('#mobile-menu').setAttribute('aria-controls','sidebar');
+document.querySelectorAll('.app .table-wrap table').forEach(table=>{table.querySelectorAll('thead th').forEach(th=>th.scope='col');});
+
+// Summary: actionable counts derived from the loaded data, no invented trends.
+document.querySelector('#view-resumen .stats').insertAdjacentHTML('afterend','<div id="suite-summary" class="suite-summary"></div>');
+function suiteSummary(){if(!opsAdmin()||!suiteVisible('resumen'))return;const today=new Date().toDateString();const cards=[['Por revisar',candidates.filter(c=>c.etapa==='nuevo').length,'Postulaciones en la primera etapa','seguimiento'],['Entrevistas hoy',opsInterviews.filter(i=>i.status!=='cancelled'&&new Date(i.startsAt).toDateString()===today).length,'Consulta horarios y lugares','agenda'],['Perfiles sin CV',users.filter(u=>u.rol!=='admin'&&u.activo!==false&&!u.cvData).length,'Revisa la documentación disponible','talento']];document.querySelector('#suite-summary').innerHTML=cards.map(([label,count,note,view])=>`<button class="suite-quick" type="button" data-suite-view="${view}"><span>${label}</span><strong>${count}</strong><small>${note} <b aria-hidden="true">↗</b></small></button>`).join('');document.querySelectorAll('[data-suite-view]').forEach(b=>b.onclick=()=>showView(b.dataset.suiteView));}
+
+// Document memory: searchable files and bounded table rendering.
+const suiteBaseMemory=renderDocumentMemory;
+let suiteMemoryDirty=true;
+// Keep maintenance and explanatory material available without pushing the files below the fold.
+const maintenance=document.querySelector('#view-memoria > .registration-privacy');
+if(maintenance){const details=document.createElement('details');details.className='suite-maintenance';const summary=document.createElement('summary');summary.textContent='Mantenimiento de registros anteriores';details.append(summary);while(maintenance.firstChild)details.append(maintenance.firstChild);maintenance.replaceWith(details);document.querySelector('#view-memoria .card').after(details);}
+const backupCard=document.querySelector('#view-memoria .card');
+const backupHelp=document.createElement('details');backupHelp.className='suite-backup-help';backupHelp.innerHTML='<summary>Cómo funciona la copia de documentos</summary>';[...backupCard.querySelectorAll('p:not(#backup-status)')].forEach(p=>backupHelp.append(p));backupCard.append(backupHelp);
+document.querySelector('#backup-export').textContent='Exportar todos los PDF';
+suiteToolbar(document.querySelector('#view-memoria .table-wrap'),suiteInput('suite-memory-search','Buscar documento','Persona o nombre del PDF…')+suiteSelect('suite-memory-sort','Orden',[['name','Nombre: A–Z'],['size','Mayor tamaño primero']]));
+const memoryPager=suitePager('suite-memory',document.querySelector('#view-memoria .table-wrap'));
+renderDocumentMemory=function(){
+  if(!document.querySelector('#backup-notice'))return;
+  const admin=currentProfile?.rol==='admin';document.querySelector('#backup-notice').classList.toggle('hidden',!admin||new Date().getDate()<10||lastBackup()===backupMonth());
+  if(!admin){suiteBaseMemory();return;}if(!suiteVisible('memoria'))return;
+  if(suiteMemoryDirty){suiteBaseMemory();suiteMemoryDirty=false;}const q=suiteText(document.querySelector('#suite-memory-search').value),sort=document.querySelector('#suite-memory-sort').value;
+  const records=users.filter(u=>u.cvData&&(!q||suiteText(`${u.nombre} ${u.cvName}`).includes(q))).sort((a,b)=>sort==='size'?docSize(b)-docSize(a):String(a.nombre).localeCompare(String(b.nombre),'es'));
+  const shown=suiteSlice(records,memoryPager,renderDocumentMemory);
+  document.querySelector('#memory-files').innerHTML=shown.length?shown.map(u=>`<tr><td><strong>${escapeHtml(u.nombre)}</strong></td><td><span class="suite-file-tag">PDF</span> ${escapeHtml(u.cvName||'CV.pdf')}</td><td>${formatMemory(docSize(u))}</td><td><button type="button" class="btn btn-secondary" data-memory-pdf="${escapeHtml(u.id)}">Ver documento</button></td></tr>`).join(''):'<tr><td colspan="4">'+suiteEmpty('No hay documentos que coincidan')+'</td></tr>';
+  document.querySelectorAll('[data-memory-pdf]').forEach(b=>b.onclick=()=>downloadUserCv(b.dataset.memoryPdf));
+};
+suiteBind(['suite-memory-search','suite-memory-sort'],memoryPager,renderDocumentMemory);
+
+// Agenda: date, status and text filters, preserving existing edit/cancel/delete actions.
+suiteToolbar(document.querySelector('#ops-agenda-status'),suiteInput('suite-agenda-search','Buscar entrevista','Persona, vacante o lugar…')+suiteSelect('suite-agenda-state','Mostrar',[['all','Todas'],['upcoming','Próximas'],['today','Hoy'],['past','Pasadas'],['cancelled','Canceladas']])+suiteInput('suite-agenda-date','Día específico','','date'));
+document.querySelector('#ops-agenda-status').insertAdjacentHTML('beforebegin','<div class="suite-chips" id="suite-agenda-summary"></div>');
+const agendaPager=suitePager('suite-agenda',document.querySelector('#ops-agenda'));
+function suiteAgenda(){
+  if(!currentProfile||!suiteVisible('agenda'))return;
+  const admin=opsAdmin(),all=opsInterviews.filter(i=>admin||i.userId===currentProfile.id).sort((a,b)=>Date.parse(a.startsAt)-Date.parse(b.startsAt)),q=suiteText(document.querySelector('#suite-agenda-search').value),filter=document.querySelector('#suite-agenda-state').value,day=document.querySelector('#suite-agenda-date').value,now=new Date();
+  const localDay=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  document.querySelector('#suite-agenda-summary').innerHTML=`<span>${all.filter(i=>i.status!=='cancelled'&&localDay(new Date(i.startsAt))===localDay(now)).length} hoy</span><span>${all.filter(i=>i.status!=='cancelled'&&new Date(i.startsAt)>=now).length} próximas</span><span>${all.filter(i=>i.status==='cancelled').length} canceladas</span>`;
+  const cards=[...document.querySelector('#ops-agenda').children];
+  const records=all.map((record,index)=>({record,node:cards[index]})).filter(({record:i,node})=>{const d=new Date(i.startsAt),cancelled=i.status==='cancelled';return node&&(!q||suiteText([i.candidateName,i.jobTitle,i.place].join(' ')).includes(q))&&(!day||localDay(d)===day)&&(filter==='all'||(filter==='cancelled'?cancelled:!cancelled&&(filter==='today'?localDay(d)===localDay(now):filter==='past'?d<now:d>=now)));});
+  const shown=suiteSlice(records,agendaPager,renderOperations);const target=document.querySelector('#ops-agenda');
+  if(opsStates.interviews!=='ready'){agendaPager.el.classList.add('hidden');return;}agendaPager.el.classList.remove('hidden');
+  target.replaceChildren(...shown.map(x=>x.node));if(!shown.length)target.innerHTML=suiteEmpty('No hay entrevistas con estos filtros');
+}
+suiteBind(['suite-agenda-search','suite-agenda-state','suite-agenda-date'],agendaPager,()=>renderOperations());
+
+// Activity: add date range and duplicate search to the existing audited history.
+const auditTools=document.querySelector('.polish-audit-tools');auditTools.insertAdjacentHTML('beforeend',`<label class="suite-date-label">Desde<input id="suite-audit-from" type="date"></label><label class="suite-date-label">Hasta<input id="suite-audit-to" type="date"></label>`);
+const suiteAuditRows=polishAuditRows;polishAuditRows=function(){const from=document.querySelector('#suite-audit-from').value,to=document.querySelector('#suite-audit-to').value;return suiteAuditRows().filter(row=>{const date=new Date(row.createdAt);return (!from||date>=new Date(from+'T00:00:00'))&&(!to||date<=new Date(to+'T23:59:59.999'));});};
+['suite-audit-from','suite-audit-to'].forEach(id=>document.querySelector('#'+id).onchange=()=>{polishAuditPage=1;polishRenderAudit();});
+document.querySelector('#polish-audit-search').oninput=()=>suiteDebounce('audit',()=>{polishAuditPage=1;polishRenderAudit();});
+suiteToolbar(document.querySelector('#ops-duplicates'),suiteInput('suite-duplicate-search','Buscar coincidencias','Nombre o teléfono…'));
+document.querySelector('#ops-duplicates').insertAdjacentHTML('beforebegin','<p id="suite-duplicate-count" class="meta" role="status"></p>');
+function suiteDuplicates(){if(!suiteVisible('actividad')||!opsAdmin())return;const q=suiteText(document.querySelector('#suite-duplicate-search').value);const cards=[...document.querySelector('#ops-duplicates').children];cards.forEach(c=>c.hidden=Boolean(q&&!suiteText(c.textContent).includes(q)));document.querySelector('#suite-duplicate-count').textContent=opsDuplicateGroups(users).length?`${cards.filter(c=>!c.hidden).length} grupos coinciden con la búsqueda`:'No se encontraron grupos duplicados.';}
+document.querySelector('#suite-duplicate-search').oninput=()=>suiteDebounce('duplicates',suiteDuplicates);
+
+// Statistics: filter and paginate the per-vacancy results without changing the report totals.
+suiteToolbar(document.querySelector('#view-estadisticas .table-wrap'),suiteInput('suite-analytics-search','Resultados por vacante','Buscar una vacante…'));
+const analyticsPager=suitePager('suite-analytics',document.querySelector('#view-estadisticas .table-wrap'));
+const suiteBaseAnalytics=renderAnalytics;
+renderAnalytics=function(){if(!opsAdmin()||!suiteVisible('estadisticas'))return;suiteBaseAnalytics();const table=document.querySelector('#analytics-jobs'),rows=[...table.rows].filter(r=>!r.cells[0].hasAttribute('colspan')),q=suiteText(document.querySelector('#suite-analytics-search').value);const filtered=rows.filter(r=>!q||suiteText(r.cells[0].textContent).includes(q));const shown=suiteSlice(filtered,analyticsPager,renderAnalytics);table.replaceChildren(...shown);if(!shown.length)table.innerHTML='<tr><td colspan="5">'+suiteEmpty(proCandidatesStatus==='ready'?'No hay resultados para esta búsqueda':'Esperando los datos del proceso')+'</td></tr>';document.querySelectorAll('.analytics-track').forEach(track=>{const row=track.previousElementSibling;track.setAttribute('role','img');track.setAttribute('aria-label',row?.textContent||'Gráfica de postulaciones');});};
+suiteBind(['suite-analytics-search'],analyticsPager,renderAnalytics);
+document.querySelector('#analytics-period').addEventListener('change',()=>{analyticsPager.page=1;renderAnalytics();});
+
+// Vacancies: status filter complements location, department, modality and favorites.
+document.querySelector('.pro-toolbar').insertAdjacentHTML('beforeend',suiteSelect('suite-job-state','Estado',[['all','Todas las vacantes'],['open','Abiertas'],['closed','Cerradas']]));
+const suiteFilteredJobs=proFiltered;proFiltered=function(){const state=document.querySelector('#suite-job-state').value;return suiteFilteredJobs().filter(j=>state==='all'||(state==='closed'?j.estado==='cerrada':j.estado!=='cerrada'));};
+document.querySelector('#suite-job-state').onchange=()=>{proPage=1;renderJobs();};
+document.querySelector('#pro-clear').addEventListener('click',()=>{document.querySelector('#suite-job-state').value='all';proPage=1;renderJobs();});
+
+// Follow-up: compact view and a stage jump control for wide/mobile boards.
+document.querySelector('#view-seguimiento .pipeline-toolbar').insertAdjacentHTML('afterend',`<div class="suite-board-tools admin-only"><label>Ir a etapa <select id="suite-stage-jump"><option value="nuevo">Nuevos</option><option value="revision">En revisión</option><option value="entrevista">Entrevista</option><option value="contratado">Contratados</option><option value="descartado">No seleccionados</option></select></label><button type="button" class="btn btn-secondary" id="suite-compact" aria-pressed="false">Vista compacta</button></div>`);
+document.querySelector('#suite-compact').onclick=function(){const compact=document.querySelector('#view-seguimiento').classList.toggle('suite-compact');this.setAttribute('aria-pressed',String(compact));this.textContent=compact?'Vista detallada':'Vista compacta';};
+document.querySelector('#suite-stage-jump').onchange=function(){const board=document.querySelector('#view-seguimiento .kanban'),column=document.querySelector('#col-'+this.value)?.closest('.column');if(column)board.scrollBy({left:column.getBoundingClientRect().left-board.getBoundingClientRect().left,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});};
+document.querySelector('#pipeline-search').oninput=()=>suiteDebounce('pipeline',()=>{renderKanban();decorateCandidateCards();markBlacklistMatches();});
+
+// Talent directory: CV/state filters and a bounded set of cards.
+suiteToolbar(document.querySelector('#talent-list'),suiteSelect('suite-talent-cv','Currículum',[['all','Con y sin CV'],['yes','Con CV'],['no','Sin CV']])+suiteSelect('suite-talent-state','Cuenta',[['all','Todas'],['active','Activas'],['inactive','Inactivas']])+suiteSelect('suite-talent-sort','Orden',[['name','Nombre: A–Z'],['completion','Perfil más completo']]));
+const talentPager=suitePager('suite-talent',document.querySelector('#talent-list'));
+renderTalent=function(){
+  if(!opsAdmin()||!suiteVisible('talento'))return;
+  const q=suiteText(document.querySelector('#talent-search').value),cv=document.querySelector('#suite-talent-cv').value,state=document.querySelector('#suite-talent-state').value,sort=document.querySelector('#suite-talent-sort').value;
+  const rows=users.filter(u=>u.rol!=='admin'&&(!q||suiteText([u.nombre,u.especialidad,u.habilidades].join(' ')).includes(q))&&(cv==='all'||(cv==='yes'?Boolean(u.cvData):!u.cvData))&&(state==='all'||(state==='inactive'?u.activo===false:u.activo!==false))).sort((a,b)=>sort==='completion'?profileCompletion(b)-profileCompletion(a):String(a.nombre).localeCompare(String(b.nombre),'es'));
+  const shown=suiteSlice(rows,talentPager,renderTalent);
+  document.querySelector('#talent-list').innerHTML=shown.length?shown.map(u=>{const pct=profileCompletion(u);return `<article class="talent-card"><div class="talent-head"><div class="avatar" aria-hidden="true">${escapeHtml((u.nombre||'U')[0])}</div><div><strong>${escapeHtml(u.nombre)}</strong><div class="meta">${escapeHtml(u.especialidad||'Perfil por completar')}</div></div></div><span class="suite-status ${u.activo===false?'muted':''}">${u.activo===false?'Cuenta inactiva':'Cuenta activa'}</span><p class="meta">${escapeHtml(u.experiencia||'Experiencia no indicada')} · ${escapeHtml(u.ubicacion||'Ubicación no indicada')}</p><div class="skill-list">${(u.habilidades||'').split(',').filter(Boolean).slice(0,4).map(x=>`<span class="skill-chip">${escapeHtml(x.trim())}</span>`).join('')}</div><div class="completion">Perfil ${pct}% completo</div><div class="progress-line" role="progressbar" aria-label="Perfil completo" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span></div><div class="candidate-actions"><button class="btn ${u.cvData?'btn-primary':'btn-secondary'}" data-cv-user="${escapeHtml(u.id)}" ${u.cvData?'':'disabled'}>${u.cvData?'Abrir CV':'Sin CV'}</button><button class="delete-btn" data-delete-user="${escapeHtml(u.id)}" aria-label="Eliminar perfil de ${escapeHtml(u.nombre)}">×</button></div></article>`;}).join(''):suiteEmpty('No hay perfiles con estos filtros');document.querySelectorAll('[data-cv-user]').forEach(b=>b.onclick=()=>downloadUserCv(b.dataset.cvUser));bindDeleteButtons();
+};
+document.querySelector('#talent-search').oninput=()=>suiteDebounce('talent',()=>{talentPager.page=1;renderTalent();});suiteBind(['suite-talent-cv','suite-talent-state','suite-talent-sort'],talentPager,renderTalent);
+
+// Exclusions: readable observations, optional reason filter and pagination.
+document.querySelector('#view-lista-negra .table-toolbar').insertAdjacentHTML('beforeend',`<label class="suite-inline-label">Motivo<select id="suite-exclusion-reason"><option value="">Todos los motivos</option></select></label>`);
+const exclusionPager=suitePager('suite-exclusion',document.querySelector('#view-lista-negra .table-wrap'));
+const suiteBaseBlacklist=renderBlacklist;
+renderBlacklist=function(){if(!opsAdmin()||!suiteVisible('lista-negra'))return;suiteBaseBlacklist();const select=document.querySelector('#suite-exclusion-reason'),selected=select.value;select.innerHTML='<option value="">Todos los motivos</option>'+[...new Set(blacklist.map(b=>String(b.motivo||'')))].filter(Boolean).sort((a,b)=>a.localeCompare(b,'es')).map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join('');select.value=selected;const tbody=document.querySelector('#blacklist-list'),rows=[...tbody.rows].filter(r=>r.cells.length===7&&(!select.value||r.cells[2].textContent===select.value)),shown=suiteSlice(rows,exclusionPager,renderBlacklist);tbody.replaceChildren(...shown);shown.forEach(row=>{const note=row.querySelector('.blacklist-note');if(note){const text=note.textContent;const details=document.createElement('details');details.className='suite-note-detail';const summary=document.createElement('summary');summary.textContent=text?'Ver observaciones':'Sin observaciones';const p=document.createElement('p');p.textContent=text;details.append(summary,p);note.replaceWith(details);}});if(!shown.length)tbody.innerHTML='<tr><td colspan="7">'+suiteEmpty('No hay registros con estos filtros')+'</td></tr>';};
+document.querySelector('#blacklist-search').oninput=()=>suiteDebounce('blacklist',()=>{exclusionPager.page=1;renderBlacklist();});document.querySelector('#blacklist-filter').onchange=()=>{exclusionPager.page=1;renderBlacklist();};document.querySelector('#suite-exclusion-reason').onchange=()=>{exclusionPager.page=1;renderBlacklist();};
+
+// Profile: do not overwrite a draft when another collection sends a snapshot.
+let suiteProfileDirty=false,suiteProfileBusy=false,suiteProfileRevision=0;
+const suiteProfileForm=document.querySelector('#profile-form');
+suiteProfileForm.insertAdjacentHTML('beforeend','<p id="suite-profile-status" class="suite-form-status" role="status" aria-live="polite"></p>');
+suiteProfileForm.addEventListener('input',()=>{suiteProfileDirty=true;suiteProfileRevision++;document.querySelector('#suite-profile-status').textContent='Tienes cambios sin guardar.';});
+const suiteBaseProfile=renderProfile;renderProfile=function(){if(!currentProfile)return;const drafts=suiteProfileDirty?[...suiteProfileForm.querySelectorAll('input,select,textarea')].map(el=>[el.id,el.value]):null;suiteBaseProfile();if(drafts){drafts.forEach(([id,value])=>document.getElementById(id).value=value);renderSkillPreview();}};
+suiteProfileForm.onsubmit=async function(event){
+  event.preventDefault();if(!currentProfile||!auth.currentUser||suiteProfileBusy)return;
+  const status=document.querySelector('#suite-profile-status'),phone=document.querySelector('#profile-phone').value.trim();if(phone&&!normalizeWhatsAppPhone(phone)){status.textContent='Escribe el teléfono con + y código de país.';return;}
+  const owner=currentProfile.id,revision=suiteProfileRevision,baseline=cloudBaseline.users.get(owner),map={especialidad:'title',experiencia:'experience',telefono:'phone',ubicacion:'location',disponibilidad:'availability',linkedin:'linkedin',habilidades:'skills',resumen:'summary'},patch={};Object.entries(map).forEach(([key,id])=>patch[key]=document.querySelector('#profile-'+id).value.trim());if(phone)patch.telefono=normalizeWhatsAppPhone(phone);
+  suiteProfileBusy=true;const button=this.querySelector('[type="submit"]');button.disabled=true;button.textContent='Guardando…';status.textContent='Guardando tu perfil…';
+  try{const updated=await runTransaction(db,async transaction=>{if(currentProfile?.id!==owner||sessionClosing)throw Error('La sesión cambió');const ref=doc(db,'users',owner),snap=await transaction.get(ref);if(!snap.exists())throw Error('Perfil no disponible');const next={...snap.data(),...patch,id:owner};transaction.set(ref,cloudClean(next));return next;});if(currentProfile?.id!==owner||sessionClosing)return;if(cloudBaseline.users.get(owner)===baseline){users=users.map(u=>u.id===owner?updated:u);currentProfile=updated;cloudBaseline.users.set(owner,cloudClean(updated));}suiteProfileDirty=suiteProfileRevision!==revision;status.textContent=suiteProfileDirty?'Perfil guardado. Hay cambios nuevos pendientes.':'Perfil guardado correctamente.';renderProfile();}catch{if(currentProfile?.id===owner&&!sessionClosing)status.textContent='No se pudo guardar. Tus cambios siguen en el formulario para reintentar.';}finally{suiteProfileBusy=false;button.disabled=false;button.textContent='Guardar perfil';}
+};
+
+// Avoid repeatedly building hidden operational views; refresh them when opened.
+const suiteBaseOperations=renderOperations;
+renderOperations=function(){suiteSummary();if(!currentProfile)return;if(!suiteVisible('agenda')&&!suiteVisible('actividad')&&!document.querySelector('#ops-person-dialog[open]')&&!document.querySelector('#ops-interview-dialog[open]'))return;suiteBaseOperations();suiteAgenda();suiteDuplicates();};
+const suiteBaseAll=renderAll;renderAll=function(){if(!currentProfile||sessionClosing)return;suiteMemoryDirty=true;suiteBaseAll();suiteSummary();};
+const suiteBaseShow=showView;showView=function(name){suiteBaseShow(name);if(!suiteVisible(name))return;suiteCloseMenu();if(name==='memoria')suiteMemoryDirty=true;document.querySelectorAll('.nav-btn').forEach(b=>{if(b.dataset.view===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});const handlers={memoria:renderDocumentMemory,agenda:renderOperations,actividad:renderOperations,estadisticas:renderAnalytics,talento:renderTalent,'lista-negra':renderBlacklist,usuarios:renderUsers,resumen:suiteSummary,perfil:renderProfile};handlers[name]?.();};
+window.addEventListener('yello-session-change',()=>{suiteTimers.forEach(clearTimeout);suiteTimers.clear();suiteProfileDirty=false;suiteProfileRevision=0;[memoryPager,agendaPager,analyticsPager,talentPager,exclusionPager].forEach(p=>p.page=1);scrim.classList.add('hidden');});
 
 </script>
 <style>
